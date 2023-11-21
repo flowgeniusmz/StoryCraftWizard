@@ -108,10 +108,13 @@ if vImage is not None:
                         for content_part in message.content:
                             message_text = content_part.text.value
                             st.markdown(message_text)
-        
-        if prompt := st.chat_input("How can I help you?"):
-            with st.chat_message('user'):
-                st.write(prompt)
+
+         prompt = st.chat_input("How can I help you?")
+         with prompt:
+             st.markdown(vContent)
+        #if prompt := st.chat_input("How can I help you?"):
+            #with st.chat_message('user'):
+                #st.write(prompt)
         
             # Add message to the thread
             st.session_state.messages = client.beta.threads.messages.create(
