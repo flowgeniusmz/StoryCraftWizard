@@ -3,6 +3,7 @@ import openai
 from openai import OpenAI
 import time
 import uuid
+from PIL import Image
 
 
 st.set_page_config("StoryCraft Wizard", initial_sidebar_state="collapsed", layout="wide")
@@ -18,9 +19,25 @@ st.divider()
 
 vTheme = st.text_input("Theme")
 vImage = st.file_uploader("Upload a picture of the person/pet you'd like on a card, board, or coloring page", type=['png', 'jpg', 'jpeg', 'gif'])
+st.divider()
+
+
 if vImage is not None:
     if vTheme is not None:
-        
+        vFile = client.files.create(
+            file = open(vImage, "rb"),
+            purpose = "assistants"
+        )
+        vFileId = vFile.id
+        vContent = f"Commence Narrative Construction\n\nTheme: {vTheme}\n\nCharacter Image: See attached image (file_id {vFileId})"
+        vMessage = [
+            {
+                "role": "user",
+                "content": vContent,
+                "file_ids": [vFileId]
+            }
+        ]
+
 
 
 
@@ -33,7 +50,7 @@ if vImage is not None:
         
         if "messages" not in st.session_state: #stores messages of the assistant
             st.session_state.messages = []
-            st.chat_message("assistant").markdown("I am your FEOC assistant. How may I help you?")
+            st.chat_message("assistant").markdown("I am your StoryCraft Wizard. How may I help you?")
        
         if "retry_error" not in st.session_state: #used for error handling
             st.session_state.retry_error = 0
@@ -47,6 +64,7 @@ if vImage is not None:
         
             # Create a new thread for this session
             st.session_state.thread = client.beta.threads.create(
+                messages=vMessage,
                 metadata={
                     'session_id': st.session_state.session_id,
                 }
