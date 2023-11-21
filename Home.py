@@ -109,10 +109,8 @@ if vImage is not None:
                             message_text = content_part.text.value
                             st.markdown(message_text)
 
-        #prompt = st.chat_input("How can I help you?")
-        #with prompt:
-            #st.markdown(vContent)
-        #if prompt := st.chat_input("How can I help you?"):
+       
+        if prompt := st.chat_input("Confirm"):
             #with st.chat_message('user'):
                 #st.write(prompt)
         
