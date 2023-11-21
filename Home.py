@@ -25,7 +25,7 @@ st.divider()
 if vImage is not None:
     if vTheme is not None:
         vFile = client.files.create(
-            file = open(vImage, "rb"),
+            file = vImage.getvalue(),
             purpose = "assistants"
         )
         vFileId = vFile.id
