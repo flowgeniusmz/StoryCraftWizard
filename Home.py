@@ -65,7 +65,6 @@ if vImage is not None:
         
             # Create a new thread for this session
             st.session_state.thread = client.beta.threads.create(
-                messages=vMessage,
                 metadata={
                     'session_id': st.session_state.session_id,
                 }
@@ -118,7 +117,8 @@ if vImage is not None:
             st.session_state.messages = client.beta.threads.messages.create(
                 thread_id=st.session_state.thread.id,
                 role="user",
-                content=prompt
+                content=vContent,
+                file_ids=[vFileId]
             )
         
             # Do a run to process the messages in the thread
