@@ -111,8 +111,8 @@ if vImage is not None:
 
        
         if prompt := st.chat_input("Confirm"):
-            #with st.chat_message('user'):
-                #st.write(prompt)
+            with st.chat_message('user'):
+                st.write(prompt)
         
             # Add message to the thread
             st.session_state.messages = client.beta.threads.messages.create(
