@@ -52,7 +52,7 @@ if vImage is not None:
         if "messages" not in st.session_state: #stores messages of the assistant
             st.session_state.messages = []
             st.chat_message("assistant").markdown("I am your StoryCraft Wizard. How may I help you?")
-       
+            st.chat_message("user").markdown(vContent)   
         if "retry_error" not in st.session_state: #used for error handling
             st.session_state.retry_error = 0
     
