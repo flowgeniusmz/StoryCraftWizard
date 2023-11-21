@@ -24,6 +24,7 @@ st.divider()
 
 if vImage is not None:
     if vTheme is not None:
+        print(vImage.getvalue())
         vFile = client.files.create(
             file = vImage.getvalue(),
             purpose = "assistants"
